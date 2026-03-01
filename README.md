@@ -94,13 +94,14 @@ docker run -p 8000:8000 -e OPENWEATHERMAP_API_KEY=your_api_key_here mcp-hisyo
 - `src/` 配下にソースコード・Dockerfile を整理
 - `infra/` に Bicep テンプレート（Container Registry、Container Apps Environment、Container App）を追加
 - `azure.yaml` で [Azure Developer CLI (azd)](https://learn.microsoft.com/ja-jp/azure/developer/azure-developer-cli/) によるプロビジョニング・デプロイに対応
-- `OPENWEATHERMAP_API_KEY` は Azure Key Vault 経由でシークレットとして管理
+- `OPENWEATHERMAP_API_KEY` は azd の環境変数として設定し、デプロイ時に Container App のシークレットとして注入
 
 ### デプロイ手順
 
 ```bash
 git checkout feature/aca-deploy
 azd auth login
+azd env set OPENWEATHERMAP_API_KEY your_api_key_here
 azd up
 ```
 
