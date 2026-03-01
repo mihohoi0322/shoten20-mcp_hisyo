@@ -87,6 +87,35 @@ docker run -p 8000:8000 -e OPENWEATHERMAP_API_KEY=your_api_key_here mcp-hisyo
 }
 ```
 
+## Azure Container Apps へのデプロイ
+
+[Azure Developer CLI (azd)](https://learn.microsoft.com/ja-jp/azure/developer/azure-developer-cli/) を使用して Azure Container Apps にデプロイできます。
+
+### デプロイ手順
+
+```bash
+azd auth login
+azd env set OPENWEATHERMAP_API_KEY your_api_key_here
+azd up
+```
+
+`OPENWEATHERMAP_API_KEY` は azd の環境変数として設定し、デプロイ時に Container App のシークレットとして注入されます。
+
+### リモート MCP サーバーとしての接続
+
+デプロイ後、`.vscode/mcp.json` に以下を設定すると、Azure 上の MCP サーバーに接続できます。
+
+```json
+{
+  "servers": {
+    "hisyo": {
+      "type": "http",
+      "url": "https://<your-container-app-url>/mcp"
+    }
+  }
+}
+```
+
 ## 利用 API
 
 - [OpenWeatherMap API](https://openweathermap.org/api) — 天気予報

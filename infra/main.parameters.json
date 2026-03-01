@@ -9,7 +9,7 @@
       "value": "${AZURE_LOCATION}"
     },
     "openWeatherMapApiKey": {
-      "value": "$(secretOrRandomPassword ${AZURE_KEY_VAULT_NAME} openweathermap-api-key)"
+      "value": "${OPENWEATHERMAP_API_KEY}"
     }
   }
 }
