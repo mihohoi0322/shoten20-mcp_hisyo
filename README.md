@@ -87,6 +87,38 @@ docker run -p 8000:8000 -e OPENWEATHERMAP_API_KEY=your_api_key_here mcp-hisyo
 }
 ```
 
+## Azure Container Apps へのデプロイ
+
+[`feature/aca-deploy`](https://github.com/mihohoi0322/shoten20-mcp_hisyo/tree/feature/aca-deploy) ブランチでは、Azure Container Apps (ACA) へのデプロイに対応しています。
+
+- `src/` 配下にソースコード・Dockerfile を整理
+- `infra/` に Bicep テンプレート（Container Registry、Container Apps Environment、Container App）を追加
+- `azure.yaml` で [Azure Developer CLI (azd)](https://learn.microsoft.com/ja-jp/azure/developer/azure-developer-cli/) によるプロビジョニング・デプロイに対応
+- `OPENWEATHERMAP_API_KEY` は Azure Key Vault 経由でシークレットとして管理
+
+### デプロイ手順
+
+```bash
+git checkout feature/aca-deploy
+azd auth login
+azd up
+```
+
+### リモート MCP サーバーとしての接続
+
+デプロイ後、`.vscode/mcp.json` に以下を設定すると、Azure 上の MCP サーバーに接続できます。
+
+```json
+{
+  "servers": {
+    "hisyo": {
+      "type": "http",
+      "url": "https://<your-container-app-url>/mcp"
+    }
+  }
+}
+```
+
 ## 利用 API
 
 - [OpenWeatherMap API](https://openweathermap.org/api) — 天気予報
