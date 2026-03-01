@@ -1,0 +1,6 @@
+__pycache__/
+.mypy_cache/
+.env
+*.pyc
+.vscode/*
+!.vscode/mcp.sample.json

@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "mcp_hisyo": {
+      "command": "python3",
+      "args": ["<PATH>/mcp_myhisyo.py"]
+    }
+  }
+}
