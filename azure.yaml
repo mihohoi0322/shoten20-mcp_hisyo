@@ -1,0 +1,10 @@
+name: mcp-hisyo
+metadata:
+  template: mcp-hisyo
+services:
+  api:
+    project: .
+    host: containerapp
+    language: python
+    docker:
+      path: Dockerfile
